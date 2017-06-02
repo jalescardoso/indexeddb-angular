@@ -8,9 +8,10 @@ Fork project https://github.com/gilf/angular2-indexeddb
 
 Installation
 ------------
-    ```
-    npm install indexeddb-angular --save
-    ```
+
+```
+npm install indexeddb-angular --save
+```
 
 Usage
 -----
