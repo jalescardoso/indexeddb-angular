@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var IndexedDBAngular = (function () {
-    function IndexedDBAngular(dbName, version) {
+    function IndexedDBAngular() {
+        console.log('constroe essa merda');
         this.utils = new Utils();
-        this.dbWrapper = new DbWrapper(dbName, version);
+        this.dbWrapper = new DbWrapper('anda', 1);
     }
     IndexedDBAngular.prototype.createStore = function (version, upgradeCallback) {
         var _this = this;
