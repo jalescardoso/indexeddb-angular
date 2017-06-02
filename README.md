@@ -33,14 +33,14 @@ First instantiate the service as follows:
 
 ```js
 constructor(public db: IndexedDBAngular) {
-        db.createDb('myDb', 1);
-        db.createStore(1, this.createCollections);
-    }
+    db.createDb('myDb', 1);
+    db.createStore(1, this.createCollections);
+}
 
-    createCollections(db) {
-        db.currentTarget.result.createObjectStore('exampleCollection1');
-        db.currentTarget.result.createObjectStore('exampleCollection2');
-    }
+createCollections(db) {
+    db.currentTarget.result.createObjectStore('exampleCollection1');
+    db.currentTarget.result.createObjectStore('exampleCollection2');
+}
 ```
 The first argument is the name of your database and the second is the database version.
 If you forget the version you the service will default to version 1.
