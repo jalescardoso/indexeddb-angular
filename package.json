@@ -2,6 +2,10 @@
   "name": "indexeddb-angular",
   "version": "0.1.1",
   "description": "indexeddb-angular is a library that wraps indexeddb database in an Angular 2 service",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jalescardoso/indexeddb-angular.git"
+  },
   "main": "dist/index.js",
   "typings": "dist/index",
   "dependencies": {
