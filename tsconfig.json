@@ -1,0 +1,16 @@
+{
+    "version": "1.5.0-alpha",
+    "compilerOptions": {
+       "declaration": true,
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
