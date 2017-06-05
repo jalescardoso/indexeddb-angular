@@ -21,10 +21,14 @@ Import the the `IndexedDBAngular` class as a dependency:
 ```js
 import { IndexedDBAngular } from 'indexeddb-angular';
 
+export function provideIndexedDB() {
+  return new IndexedDBAngular('myDb', 1)//database name, version
+}
+
 @NgModule({
   imports: [],
   declarations: [],
-  providers: [ IndexedDBAngular ]
+  providers: [ { provide: IndexedDBAngular, useFactory: provideIndexedDB } ]
 })
 ```
 
@@ -33,7 +37,6 @@ First instantiate the service as follows:
 
 ```js
 constructor(public db: IndexedDBAngular) {
-    db.createDb('myDb', 1);
     db.createStore(1, this.createCollections);
 }
 

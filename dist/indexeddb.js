@@ -8,10 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var IndexedDBAngular = (function () {
-    function IndexedDBAngular() {
-        console.log('constroe essa merda');
+    function IndexedDBAngular(dbName, version) {
         this.utils = new Utils();
-        this.dbWrapper = new DbWrapper('anda', 1);
+        this.dbWrapper = new DbWrapper(dbName, version);
     }
     IndexedDBAngular.prototype.createStore = function (version, upgradeCallback) {
         var _this = this;
@@ -35,7 +34,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readOnly,
                 error: function (e) {
                     reject(e);
@@ -54,7 +54,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readOnly,
                 error: function (e) {
                     reject(e);
@@ -89,7 +90,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readWrite,
                 error: function (e) {
                     reject(e);
@@ -109,7 +111,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readWrite,
                 error: function (e) {
                     reject(e);
@@ -129,7 +132,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readWrite,
                 error: function (e) {
                     reject(e);
@@ -149,7 +153,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readOnly,
                 error: function (e) {
                     reject(e);
@@ -172,7 +177,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readWrite,
                 error: function (e) {
                     reject(e);
@@ -193,7 +199,8 @@ var IndexedDBAngular = (function () {
         var self = this;
         var promise = new Promise(function (resolve, reject) {
             self.dbWrapper.validateBeforeTransaction(storeName, reject);
-            var transaction = self.dbWrapper.createTransaction({ storeName: storeName,
+            var transaction = self.dbWrapper.createTransaction({
+                storeName: storeName,
                 dbMode: self.utils.dbMode.readOnly,
                 error: function (e) {
                     reject(e);

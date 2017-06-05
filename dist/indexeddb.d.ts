@@ -1,7 +1,7 @@
 export declare class IndexedDBAngular {
     private utils;
     private dbWrapper;
-    constructor();
+    constructor(dbName: string, version: number);
     createStore(version: number, upgradeCallback: Function): Promise<any>;
     getByKey(storeName: string, key: any): Promise<any>;
     getAll(storeName: string, keyRange?: IDBKeyRange, indexDetails?: IndexDetails): Promise<any>;
