@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DbWrapper, Utils, IndexDetails } from './'
 
 @Injectable()
 export class IndexedDBAngular {
@@ -13,7 +14,7 @@ export class IndexedDBAngular {
         let self = this,
             promise = new Promise<any>((resolve, reject) => {
                 this.dbWrapper.dbVersion = version;
-                let request = this.utils.indexedDB.open(this.dbWrapper.dbName, version);
+                let request: IDBOpenDBRequest = this.utils.indexedDB.open(this.dbWrapper.dbName, version);
                 request.onsuccess = function (e) {
                     self.dbWrapper.db = request.result;
                     resolve();
@@ -263,60 +264,55 @@ export class IndexedDBAngular {
 
         return promise;
     }
-}
 
-class Utils {
-    dbMode: DbMode;
-    indexedDB: IDBFactory;
+    newGetByKey(storeName: string, key: string) {
+        return new Promise<any>((resolve, reject) => {
+            var request = indexedDB.open(this.dbWrapper.dbName);
 
-    constructor() {
-        this.indexedDB = window.indexedDB || (<any>window).mozIndexedDB || (<any>window).webkitIndexedDB || (<any>window).msIndexedDB;
-        this.dbMode = {
-            readOnly: "readonly",
-            readWrite: "readwrite"
-        };
-    }
-}
+            request.onerror = function (event) {
+                reject();
+            };
+            request.onupgradeneeded = function (event) {
+                alert('onupgradeneeded')
+            };
 
-export interface IndexDetails {
-    indexName: string;
-    order: string;
-}
-
-interface DbMode {
-    readOnly: string;
-    readWrite: string;
-}
-
-class DbWrapper {
-    dbName: string;
-    dbVersion: number;
-    db: IDBDatabase;
-
-    constructor(dbName: string, version: number) {
-        this.dbName = dbName;
-        this.dbVersion = version || 1;
-        this.db = null;
+            request.onsuccess = function (event) {
+                // alert('onsuccess')
+                let db = request.result;
+                var transaction = db.transaction([storeName]);
+                var objectStore = transaction.objectStore(storeName);
+                var _request = objectStore.get(key);
+                _request.onerror = function (event) {
+                    // Tratar erro!
+                };
+                _request.onsuccess = function (event) {
+                    // Fazer algo com request.result!
+                    console.log((<any>event.target).result);
+                };
+            }
+        });
     }
 
-    validateStoreName(storeName: string) {
-        return this.db.objectStoreNames.contains(storeName);
-    };
+    newAdd(storeName: string, value: any, key?: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            var request = indexedDB.open(this.dbWrapper.dbName);
 
-    validateBeforeTransaction(storeName: string, reject: Function) {
-        if (!this.db) {
-            reject('You need to use the createStore function to create a database before you query it!');
-        }
-        if (!this.validateStoreName(storeName)) {
-            reject(('objectStore does not exists: ' + storeName));
-        }
-    }
-
-    createTransaction(options: { storeName: string, dbMode: string, error: (e: Event) => any, complete: (e: Event) => any, abort?: (e: Event) => any }): IDBTransaction {
-        let trans: IDBTransaction = this.db.transaction(options.storeName, options.dbMode);
-        trans.onerror = options.error;
-        trans.oncomplete = options.complete;
-        trans.onabort = options.abort;
-        return trans;
+            request.onerror = function (event) {
+                reject();
+            };
+            request.onupgradeneeded = function (event) {
+                var db = event.target.result;
+                var objectStore = db.createObjectStore(storeName);
+                objectStore.transaction.oncomplete = function (event) {
+                    var clientesObjectStore = db.transaction(storeName, "readwrite").objectStore(storeName);
+                    let _request = clientesObjectStore.add(value, key);
+                    _request.onsuccess = (evt: any) => {
+                        request.result.close();
+                        console.log('onsuccess newAdd')
+                    }
+                    resolve({ key: key, value: value });
+                }
+            };
+        })
     }
 }
