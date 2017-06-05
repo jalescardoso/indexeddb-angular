@@ -31,6 +31,8 @@ export function provideIndexedDB() {
   providers: [ { provide: IndexedDBAngular, useFactory: provideIndexedDB } ]
 })
 ```
+The first argument is the name of your database and the second is the database version.
+If you forget the version you the service will default to version 1.
 
 ### IndexedDBAngular service
 First instantiate the service as follows:
@@ -45,9 +47,6 @@ createCollections(db) {
     db.currentTarget.result.createObjectStore('exampleCollection2');
 }
 ```
-The first argument is the name of your database and the second is the database version.
-If you forget the version you the service will default to version 1.
-
 Use the APIs that the IndexedDBAngular service exposes to use indexeddb.
 In the API the following functions:
 * createStore(version, createCallback): initializes objectStore/s.
