@@ -19,6 +19,8 @@ Usage
 Import the the `IndexedDBAngular` class as a dependency:
 
 ```js
+import { IndexedDBAngular } from 'indexeddb-angular';
+
 private db = new IndexedDBAngular('myDb', 1);
 constructor() { this.db.createStore(1, this.createCollections);}
 createCollections(db) {
