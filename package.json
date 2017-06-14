@@ -11,8 +11,9 @@
   "dependencies": {
     "@angular/core": "^4.0.0",
     "rxjs": "^5.0.1",
-    "zone.js": "^0.8.4"    
-  },"devDependencies": {
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
     "@types/node": "^7.0.5",
     "typescript": "~2.3.4"
   },
