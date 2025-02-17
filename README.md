@@ -1,4 +1,4 @@
-indexeddb-angular
+indexeddb-angular (deprecated)
 ==============
 
 indexeddb-angular is a service that wraps IndexedDB database in an Angular service.
